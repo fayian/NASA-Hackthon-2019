@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float speed = 2.0f;
-    public  
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
+    private float ConstantForce = 500f;
+    public Rigidbody rb;
+    
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(Input.)
+        rb.AddForce(0, 0, ConstantForce * Time.deltaTime);
+
+
+
+        if(Input.GetMouseButtonDown(0) )
+        {
+
+        }
     }
 }
