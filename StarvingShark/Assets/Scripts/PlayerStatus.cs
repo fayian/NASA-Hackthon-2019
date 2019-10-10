@@ -24,7 +24,7 @@ public class PlayerStatus : MonoBehaviour {
 
     //Functions
     public void EatFood(float amount) {
-        hunger = Mathf.Max(hunger + amount, maxHunger);
+        hunger = Mathf.Min(hunger + amount, maxHunger);
     }
     public void EatPlastic(float amount) {
         plastic += amount;
@@ -41,7 +41,7 @@ public class PlayerStatus : MonoBehaviour {
             }
             EatPlastic(passivePlasticIncrease);
             if (stamina != maxStamina)
-                stamina = Mathf.Max(stamina + staminaRecover, maxStamina);
+                stamina = Mathf.Min(stamina + staminaRecover, maxStamina);
         }
     }
 
