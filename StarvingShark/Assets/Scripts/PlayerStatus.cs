@@ -36,6 +36,9 @@ public class PlayerStatus : MonoBehaviour {
     private void StatusUpdate() {
         if (Global.gameStatus == GameStatus.RUNNING) {
             hunger -= hungryRate;
+            if(hunger <= 0) {
+                Global.GameOver();
+            }
             EatPlastic(passivePlasticIncrease);
             if (stamina != maxStamina)
                 stamina = Mathf.Max(stamina + staminaRecover, maxStamina);
