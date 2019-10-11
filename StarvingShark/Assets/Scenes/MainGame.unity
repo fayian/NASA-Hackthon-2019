@@ -179,7 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &534669902
 GameObject:
@@ -257,11 +257,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -3.3333335}
+  m_LocalScale: {x: 1, y: 1, z: 0.33333334}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2197869604503337428}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &534669906
@@ -299,7 +299,6 @@ GameObject:
   - component: {fileID: 246765382352316857}
   - component: {fileID: 5787953118861472117}
   - component: {fileID: 8948370088983963122}
-  - component: {fileID: 555472399814223305}
   - component: {fileID: 555472399814223304}
   - component: {fileID: 555472399814223306}
   m_Layer: 0
@@ -321,20 +320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2453dd44ab799429c25f314e68c7aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 555472399814223306}
   player: {fileID: 0}
---- !u!114 &555472399814223305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 555472399814223303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91be30c7b8b31741a4a2d6a687213d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &555472399814223306
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -360,11 +347,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555472399814223303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -17.9}
   m_LocalScale: {x: 1, y: 1, z: 3}
-  m_Children: []
+  m_Children:
+  - {fileID: 534669905}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &5787953118861472117
 MeshRenderer:
@@ -429,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 2197869604503337428, guid: f71559c0a4772624ebfd04377fa42152,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -17.9
       objectReference: {fileID: 0}
     - target: {fileID: 2197869604503337428, guid: f71559c0a4772624ebfd04377fa42152,
         type: 3}

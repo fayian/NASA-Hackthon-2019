@@ -6,7 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     
     public Rigidbody rb;
-    private float ConstantForce = 200.0f;
+    private float ConstantSpeed = 10.0f;
+    private float RushingSpeed = 20.0f;
+    private float Speed = 10.0f;
     public PlayerStatus player;
     private float staminaDecreaseRate=10.0f;
 
@@ -15,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private float minRotateSpeed = -90.0f;
     private float RotateAcceleration = 30.0f;
     private float RotateDecreaseRate = 1.2f;
-    private Vector3 Forward;
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,13 +32,17 @@ public class PlayerMovement : MonoBehaviour
     private void handleMovement()
     {
         float Angle=transform.eulerAngles.y*Mathf.Deg2Rad;
-        rb.AddForce(ConstantForce * Time.deltaTime * Mathf.Sin(Angle), 0, ConstantForce * Time.deltaTime*Mathf.Cos(Angle));
+        transform.position+=new Vector3(Speed* Time.deltaTime * Mathf.Sin(Angle), 0.0f, Speed * Time.deltaTime*Mathf.Cos(Angle));
 
         
-        if(Input.GetMouseButton(0)&&player.stamina>=10)
+        if(Input.GetMouseButton(0)&&player.stamina>=0)
         {
-            rb.AddForce(ConstantForce * Time.deltaTime * Mathf.Sin(Angle), 0, ConstantForce * Time.deltaTime * Mathf.Cos(Angle)); ;//2 time the force
+            Speed = RushingSpeed;
             player.stamina = Mathf.Max(0, player.stamina - staminaDecreaseRate * Time.deltaTime);
+        }
+        else
+        {
+            Speed = ConstantSpeed;
         }
     }
 
