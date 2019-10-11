@@ -6,17 +6,17 @@ public class PlayerMovement : MonoBehaviour
 {
     
     public Rigidbody rb;
-    private float ConstantSpeed = 10.0f;
-    private float RushingSpeed = 20.0f;
-    private float Speed = 10.0f;
+    private float constantSpeed = 10.0f;
+    private float rushingSpeed = 20.0f;
+    private float speed = 10.0f;
     public PlayerStatus player;
     private float staminaDecreaseRate=10.0f;
 
-    private float RotateSpeed=0.0f;
+    private float rotateSpeed=0.0f;
     private float maxRotateSpeed = 90.0f;
     private float minRotateSpeed = -90.0f;
-    private float RotateAcceleration = 30.0f;
-    private float RotateDecreaseRate = 1.2f;
+    private float rotateAcceleration = 30.0f;
+    private float rotateDecreaseRate = 1.2f;
     
     private void Awake()
     {
@@ -27,22 +27,23 @@ public class PlayerMovement : MonoBehaviour
     {
         handleMovement();
         handleRotation();
+        print(rotateSpeed);
     }
 
     private void handleMovement()
     {
         float Angle=transform.eulerAngles.y*Mathf.Deg2Rad;
-        transform.position+=new Vector3(Speed* Time.deltaTime * Mathf.Sin(Angle), 0.0f, Speed * Time.deltaTime*Mathf.Cos(Angle));
+        transform.position+=new Vector3(speed* Time.deltaTime * Mathf.Sin(Angle), 0.0f, speed * Time.deltaTime*Mathf.Cos(Angle));
 
         
         if(Input.GetMouseButton(0)&&player.stamina>=0)
         {
-            Speed = RushingSpeed;
+            speed = rushingSpeed;
             player.stamina = Mathf.Max(0, player.stamina - staminaDecreaseRate * Time.deltaTime);
         }
         else
         {
-            Speed = ConstantSpeed;
+            speed = constantSpeed;
         }
     }
 
@@ -50,20 +51,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKey("d"))
         {
-            RotateSpeed = Mathf.Min(maxRotateSpeed, RotateSpeed + RotateAcceleration * Time.deltaTime);                
+            rotateSpeed = Mathf.Min(maxRotateSpeed, rotateSpeed + rotateAcceleration * Time.deltaTime);                
         }
          
         if (Input.GetKey("a"))
         {
-            RotateSpeed = Mathf.Max(minRotateSpeed, RotateSpeed - RotateAcceleration * Time.deltaTime);
+            rotateSpeed = Mathf.Max(minRotateSpeed, rotateSpeed - rotateAcceleration * Time.deltaTime);
         }
 
         if(!Input.GetKey("a")&&!Input.GetKey("d"))
         { 
-            RotateSpeed = RotateSpeed/RotateDecreaseRate ; 
+            rotateSpeed = rotateSpeed/rotateDecreaseRate ; 
         }
 
-        transform.Rotate(0,  RotateSpeed*Time.deltaTime,0);
+        transform.Rotate(0,  rotateSpeed*Time.deltaTime,0);
 
     }
 }

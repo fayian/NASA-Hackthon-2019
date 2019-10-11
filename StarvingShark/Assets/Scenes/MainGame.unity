@@ -276,7 +276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf57778856e7ea4a9e5214b4365c5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 2.5
+  sightWidth: 60
+  sightHeight: 30
 --- !u!33 &246765382352316857
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -298,6 +299,7 @@ GameObject:
   - component: {fileID: 2197869604503337428}
   - component: {fileID: 246765382352316857}
   - component: {fileID: 5787953118861472117}
+  - component: {fileID: 555472399814223305}
   - component: {fileID: 8948370088983963122}
   - component: {fileID: 555472399814223304}
   - component: {fileID: 555472399814223306}
@@ -322,6 +324,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 555472399814223306}
   player: {fileID: 0}
+--- !u!114 &555472399814223305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555472399814223303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c4da843ad798a54bb28e0224ea9f09c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHunger: 100
+  hunger: 100
+  maxStamina: 100
+  stamina: 100
+  maxPlastic: 100
+  plastic: 0
 --- !u!54 &555472399814223306
 Rigidbody:
   m_ObjectHideFlags: 0
