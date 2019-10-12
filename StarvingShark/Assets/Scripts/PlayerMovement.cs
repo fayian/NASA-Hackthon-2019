@@ -8,23 +8,23 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody rb;
     public PlayerStatus player;
 
-    private float constantSpeed = 10.0f;
-    private float rushingSpeed = 20.0f;
-    private float speed = 10.0f;
+    private const float constantSpeed = 10.0f;
+    private const float rushingSpeed = 20.0f;
+    private float speed = constantSpeed;
 
-    private float verticalSpeed = 8.0f;
     private float verticalAngle = 0.0f;
-    private float maxVerticalAngle = 20.0f;
-    private float verticalRotateSpeed = 45.0f;
-    private float verticalDecreaseSpeed = 90.0f;
+    private const float verticalSpeed = 8.0f;
+    private const float maxVerticalAngle = 20.0f;
+    private const float verticalRotateSpeed = 45.0f;
+    private const float verticalDecreaseSpeed = 90.0f;
     
-    private float staminaDecreaseRate=10.0f;
+    private const float minimumRushStamina = 5.0f;
 
-    private float rotateSpeed=0.0f;
-    private float maxRotateSpeed = 90.0f;
-    private float minRotateSpeed = -90.0f;
-    private float rotateAcceleration = 30.0f;
-    private float rotateDecreaseRate = 1.2f;
+    private float rotateSpeed = 0.0f;
+    private const float maxRotateSpeed = 90.0f;
+    private const float minRotateSpeed = -90.0f;
+    private const float rotateAcceleration = 30.0f;
+    private const float rotateDecreaseRate = 1.2f;
     
     private void Awake()
     {
@@ -36,66 +36,65 @@ public class PlayerMovement : MonoBehaviour
         handleMovement();
         handleRotation();
         handleUpAndDown();
-        print(transform.eulerAngles);
     }
 
     private void handleMovement()
     {
         float Angle=transform.eulerAngles.y*Mathf.Deg2Rad;
         transform.position+=new Vector3(speed* Time.deltaTime * Mathf.Sin(Angle), 0, speed * Time.deltaTime*Mathf.Cos(Angle));
-
+         
         
-        if(Input.GetMouseButton(0)&&player.stamina>=0)
+        if(Input.GetMouseButton(0) && player.Stamina > 0)
         {
             speed = rushingSpeed;
-            player.stamina = Mathf.Max(0, player.stamina - staminaDecreaseRate * Time.deltaTime);
+            player.isRushing = true;
         }
-        else
-        {
+        else { 
             speed = constantSpeed;
+            player.isRushing = false;
         }
     }
 
     private void handleRotation()
     {
-        if(Input.GetKey("d"))
+        if(Input.GetKey(KeyCode.D))
         {
-            rotateSpeed = Mathf.Min(maxRotateSpeed, rotateSpeed + rotateAcceleration * Time.deltaTime);                
+            rotateSpeed = Mathf.Min(maxRotateSpeed, rotateSpeed + rotateAcceleration * Time.fixedDeltaTime);                
         }
          
-        if (Input.GetKey("a"))
+        if (Input.GetKey(KeyCode.A))
         {
-            rotateSpeed = Mathf.Max(minRotateSpeed, rotateSpeed - rotateAcceleration * Time.deltaTime);
+            rotateSpeed = Mathf.Max(minRotateSpeed, rotateSpeed - rotateAcceleration * Time.fixedDeltaTime);
         }
 
-        if(!Input.GetKey("a")&&!Input.GetKey("d"))
+        if(!Input.GetKey(KeyCode.A)&&!Input.GetKey(KeyCode.D))
         { 
             rotateSpeed = rotateSpeed/rotateDecreaseRate ; 
         }
 
-        transform.Rotate(0,  rotateSpeed*Time.deltaTime,0);
+        transform.Rotate(0,  rotateSpeed*Time.fixedDeltaTime, 0);
 
     }
     private void handleUpAndDown()
     {
-        if(Input.GetKey("w"))
+        if(Input.GetKey(KeyCode.W))
         {
-            transform.position += new Vector3(0, verticalSpeed * Time.deltaTime, 0);
-            verticalAngle = Mathf.Max(-maxVerticalAngle, verticalAngle - verticalRotateSpeed * Time.deltaTime);
+            transform.position += new Vector3(0, verticalSpeed * Time.fixedDeltaTime, 0);
+            verticalAngle = Mathf.Max(-maxVerticalAngle, verticalAngle - verticalRotateSpeed * Time.fixedDeltaTime);
         }
 
-        if (Input.GetKey("s"))
+        if (Input.GetKey(KeyCode.S))
         {
-            transform.position += new Vector3(0, -verticalSpeed * Time.deltaTime, 0);
-            verticalAngle = Mathf.Min(maxVerticalAngle, verticalAngle + verticalRotateSpeed * Time.deltaTime);
+            transform.position += new Vector3(0, -verticalSpeed * Time.fixedDeltaTime, 0);
+            verticalAngle = Mathf.Min(maxVerticalAngle, verticalAngle + verticalRotateSpeed * Time.fixedDeltaTime);
         }
 
-        if (!Input.GetKey("w") && !Input.GetKey("s"))
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
         {
             if (verticalAngle >= 0)
-                verticalAngle = Mathf.Max(0, verticalAngle - verticalRotateSpeed * Time.deltaTime);
+                verticalAngle = Mathf.Max(0, verticalAngle - verticalRotateSpeed * Time.fixedDeltaTime);
             else
-                verticalAngle = Mathf.Min(0, verticalAngle + verticalRotateSpeed * Time.deltaTime);
+                verticalAngle = Mathf.Min(0, verticalAngle + verticalRotateSpeed * Time.fixedDeltaTime);
         }
 
         if (verticalAngle >= 0)
