@@ -2,25 +2,32 @@
 
 public class PlayerStatus : MonoBehaviour {
     //飢餓值
-    public float maxHunger = 100.0f;
-    public float hunger = 100.0f;
-    private float hungryRate = 0.1f;
+    [SerializeField]
+    private float hunger = 100.0f;
+    private const float maxHunger = 100.0f;    
+    private const float hungryRate = 0.5f;
     //體力值
-    public float maxStamina = 100.0f;
-    public float stamina = 100.0f;
-    private float staminaRecover = 2.0f;
+    [SerializeField]
+    private float stamina = 100.0f;
+    private const float maxStamina = 100.0f;
+    private const float staminaRecoverRate = 8.0f;
+    private const float staminaDecreaseRate = 10.0f; //stamina decrease rate when rushing
     //塑料值
-    public float maxPlastic = 100.0f;
-    public float plastic = 0.0f;
-    private float passivePlasticIncrease = 0.0f; //隨時間增加的塑料值
+    [SerializeField]
+    private float plastic = 0.0f;
+    private const float maxPlastic = 100.0f;
+    private const float passivePlasticIncreaseRate = 0.0f; //隨時間增加的塑料值
+
+    public bool isRushing = false;
 
     //Getters
-    public float MaxHunger { get => maxHunger;  }
     public float Hunger { get => hunger; }
-    public float MaxStamina { get => maxStamina; }
+    public float MaxHunger { get => maxHunger;  }
     public float Stamina { get => stamina; }
-    public float MaxPlastic { get => maxPlastic; }
+    public float MaxStamina { get => maxStamina; }
     public float Plastic { get => plastic; }
+    public float MaxPlastic { get => maxPlastic; }
+    
 
     //Functions
     public void EatFood(float amount) {
@@ -32,21 +39,29 @@ public class PlayerStatus : MonoBehaviour {
             Global.GameOver();
         }
     }
+    public void Rush(float deltaTime) {
+        
+        isRushing = true;
+    }
 
-    private void StatusUpdate() {
+    private void StatusUpdate(float deltaTime) {
         if (Global.gameStatus == GameStatus.RUNNING) {
-            hunger -= hungryRate;
+            hunger -= hungryRate * deltaTime;
             if(hunger <= 0) {
                 Global.GameOver();
             }
-            EatPlastic(passivePlasticIncrease);
-            if (stamina != maxStamina)
-                stamina = Mathf.Min(stamina + staminaRecover, maxStamina);
+
+            EatPlastic(passivePlasticIncreaseRate * deltaTime);
+
+            if(isRushing)
+                stamina = Mathf.Max(0, stamina - staminaDecreaseRate * deltaTime);
+            else if (stamina != maxStamina)
+                stamina = Mathf.Min(stamina + staminaRecoverRate * deltaTime, maxStamina);
         }
     }
 
-    void Start() {
-        InvokeRepeating("StatusUpdate", 0.0f, 0.25f); //每0.25秒一次
+    void Update() {
+        StatusUpdate(Time.deltaTime);
     }
 
 }
