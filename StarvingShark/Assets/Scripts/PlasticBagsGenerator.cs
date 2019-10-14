@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlasticBagsGenerator : MonoBehaviour
 {
     public GameObject[] plasticBags;
+    public Transform player;
     private Vector3 generateArea;
     private float waitTime;
     private float maxWaitTime = 0.5f;
@@ -15,7 +16,7 @@ public class PlasticBagsGenerator : MonoBehaviour
     private int randPlasticBags;
     void Start()
     {
-        generateArea = new Vector3(10, 10, 10);
+        generateArea = new Vector3(15, 15, 15);
         StartCoroutine(Generator());
     }
 
@@ -33,7 +34,7 @@ public class PlasticBagsGenerator : MonoBehaviour
         {
             randPlasticBags = Random.Range(0, 2);
 
-            Vector3 generatePosition = new Vector3(Random.Range(-generateArea.x, generateArea.x), Random.Range(-generateArea.y, generateArea.y), Random.Range(-generateArea.z, generateArea.z));
+            Vector3 generatePosition = new Vector3(Random.Range(-generateArea.x, generateArea.x), Random.Range(-generateArea.y, generateArea.y), Random.Range(-generateArea.z, generateArea.z)) + player.position;
 
             Instantiate(plasticBags[randPlasticBags], generatePosition + transform.TransformPoint(0, 0, 0), gameObject.transform.rotation);
 

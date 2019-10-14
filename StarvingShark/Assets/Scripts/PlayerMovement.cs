@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     private const float verticalSpeed = 8.0f;
     private const float maxVerticalAngle = 20.0f;
     private const float verticalRotateSpeed = 45.0f;
-    private const float verticalDecreaseSpeed = 90.0f;
     
     private const float minimumRushStamina = 5.0f;
 
