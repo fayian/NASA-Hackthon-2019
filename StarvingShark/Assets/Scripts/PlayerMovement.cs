@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
     public Rigidbody rb;
-    public PlayerStatus player;
+
+    public RawImage depthWarning;
+    public Texture[] depthWarningTextures = new Texture[4];
+
+    private PlayerStatus player;
 
     private const float constantSpeed = 10.0f;
     private const float rushingSpeed = 20.0f;
@@ -32,18 +36,21 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        handleMovement();
-        handleRotation();
-        handleUpAndDown();
+        HandleMovement();
+        HandleMaxDepth(15.0f);
+        HandleRotation();
+        HandleUpAndDown();
     }
 
-    private void handleMovement()
+    private void HandleMovement()
     {
         float Angle=transform.eulerAngles.y*Mathf.Deg2Rad;
-        transform.position+=new Vector3(speed* Time.deltaTime * Mathf.Sin(Angle), 0, speed * Time.deltaTime*Mathf.Cos(Angle));
-         
-        
-        if(Input.GetMouseButton(0) && player.Stamina > 0)
+        transform.position += new Vector3(speed* Time.deltaTime * Mathf.Sin(Angle), 0, speed * Time.deltaTime*Mathf.Cos(Angle));
+
+        if (transform.position.y > 0)
+            transform.position -= new Vector3(0.0f, transform.position.y, 0.0f);
+
+        if (Input.GetMouseButton(0) && player.Stamina > 0)
         {
             speed = rushingSpeed;
             player.isRushing = true;
@@ -54,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void handleRotation()
+    private void HandleRotation()
     {
         if(Input.GetKey(KeyCode.D))
         {
@@ -74,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(0,  rotateSpeed*Time.fixedDeltaTime, 0);
 
     }
-    private void handleUpAndDown()
+    private void HandleUpAndDown()
     {
         if(Input.GetKey(KeyCode.W))
         {
@@ -100,5 +107,19 @@ public class PlayerMovement : MonoBehaviour
             transform.eulerAngles = new Vector3(verticalAngle, transform.eulerAngles.y, 0);
         else
             transform.eulerAngles = new Vector3(verticalAngle+360, transform.eulerAngles.y, 0);
+    }
+
+    private void HandleMaxDepth(float depth/*in unity unit*/) {
+
+        if (transform.position.y < -depth * 14 / 15) 
+            depthWarning.texture = depthWarningTextures[3];
+        else if (transform.position.y < -depth * 5 / 6) 
+            depthWarning.texture = depthWarningTextures[2];
+        else if (transform.position.y < -depth * 2 / 3) 
+            depthWarning.texture = depthWarningTextures[1];
+        else 
+            depthWarning.texture = depthWarningTextures[0];
+
+        if (transform.position.y < -depth) Global.GameOver();
     }
 }
