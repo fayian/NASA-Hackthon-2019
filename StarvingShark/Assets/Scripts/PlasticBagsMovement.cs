@@ -28,7 +28,7 @@ public class PlasticBagsMovement : MonoBehaviour
     void FixedUpdate()
     {
         if(curTime<switchTime)
-       { curTime += 1 * Time.fixedDeltaTime; }
+        {curTime += 1 * Time.fixedDeltaTime; }
         else
         {
             curTime = 0.0f;

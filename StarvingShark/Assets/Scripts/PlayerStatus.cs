@@ -27,8 +27,11 @@ public class PlayerStatus : MonoBehaviour {
     public float MaxStamina { get => maxStamina; }
     public float Plastic { get => plastic; }
     public float MaxPlastic { get => maxPlastic; }
-    
 
+    private void Awake()
+    {
+        Global.player = this.gameObject;
+    }
     //Functions
     public void EatFood(float amount) {
         hunger = Mathf.Min(hunger + amount, maxHunger);
