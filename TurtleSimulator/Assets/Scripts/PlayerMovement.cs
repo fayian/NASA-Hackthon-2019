@@ -113,4 +113,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (transform.position.y < -depth) Global.GameOver(DeathReason.PRESSURE);
     }
+
+    void OnTriggerEnter(Collider other) {
+        if(other.gameObject.tag == "Plastic") {
+            player.EatPlastic(5.0f);
+        }
+        if(other.gameObject.tag == "Food") {
+            player.EatFood(20.0f);
+        }
+        Destroy(other.gameObject);
+    }
 }

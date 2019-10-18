@@ -16,7 +16,7 @@ public class JellyFishMovement : MonoBehaviour
 
     private float rotatateSpeedRange = 45.0f;
 
-    private const float triggerRadius = 3.0f;
+    private const float triggerRadius = 4.0f;
     private const float existRadius = 50.0f;
     private const float eatRadius = 2.0f;
     private const float eatAngle = 30.0f;
@@ -62,7 +62,6 @@ public class JellyFishMovement : MonoBehaviour
         PlayerApproach(distance, playerPosition);
 
         Disappear(distance, direction);
-
     }
     void PlayerApproach(float distance, Vector3 direction)
     {
@@ -82,12 +81,6 @@ public class JellyFishMovement : MonoBehaviour
         if (distance > existRadius)
         {
             Destroy(gameObject);
-        }
-
-        if (distance < eatRadius && Vector3.Angle(direction,Global.player.transform.forward) < eatAngle)
-        {
-            Destroy(gameObject);
-            Global.player.GetComponent<PlayerStatus>().EatFood(hungerRecover);
         }
     }
 }
