@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour {
+    public Slider staminaBar;
+    public Slider hungerBar;
+    public Slider plasticBar;
     //飢餓值
-    [SerializeField]
     private float hunger = 100.0f;
     private const float maxHunger = 100.0f;    
     private const float hungryRate = 0.5f;
     //體力值
-    [SerializeField]
     private float stamina = 100.0f;
     private const float maxStamina = 100.0f;
     private const float staminaRecoverRate = 8.0f;
@@ -19,6 +21,7 @@ public class PlayerStatus : MonoBehaviour {
     private const float passivePlasticIncreaseRate = 0.0f; //隨時間增加的塑料值
 
     public bool isRushing = false;
+
 
     //Getters
     public float Hunger { get => hunger; }
@@ -60,8 +63,16 @@ public class PlayerStatus : MonoBehaviour {
         }
     }
 
+    void Awake() {
+        staminaBar.maxValue = maxStamina;
+        hungerBar.maxValue = maxHunger;
+        plasticBar.maxValue = maxPlastic;
+    }
     void Update() {
         StatusUpdate(Time.deltaTime);
+        staminaBar.value = stamina;
+        hungerBar.value = hunger;
+        plasticBar.value = plastic;
     }
 
 }
