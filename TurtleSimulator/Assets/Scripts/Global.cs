@@ -7,6 +7,7 @@ public static class Global {
     public const float METER_PER_UNIT = 100.0f;
 
     public static GameStatus gameStatus = GameStatus.RUNNING;
+    public static GameObject player;
     public static void GameOver() {
         gameStatus = GameStatus.PAUSE;
         //TODO
