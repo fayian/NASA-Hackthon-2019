@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerStatus player;
 
-    private readonly float constantSpeed = Global.KmPerHrToUnitPerSec(4.0f);  //4(km/h) in-game scale
-    private readonly float rushingSpeed = Global.KmPerHrToUnitPerSec(10.0f);  //10(km/h) in-game scale
+    private readonly float constantSpeed = Global.KmPerHrToUnitPerSec(8.0f);  //8(km/h) in-game scale
+    private readonly float rushingSpeed = Global.KmPerHrToUnitPerSec(20.0f);  //20(km/h) in-game scale
     private float speed;
 
     private float verticalAngle = 0.0f;
