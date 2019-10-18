@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour {
 
         rotation.x = -(mousePos.y - Screen.height / 2) * (sightHeight / Screen.height);
         rotation.y = (mousePos.x - Screen.width / 2) * (sightWidth / Screen.width);
-        transform.eulerAngles = Quaternion.LookRotation(transform.parent.position - transform.position).eulerAngles + rotation;
+        transform.eulerAngles = Quaternion.LookRotation(transform.position - transform.parent.position).eulerAngles + rotation;
     }
 }
     
