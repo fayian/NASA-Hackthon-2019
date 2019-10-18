@@ -20,7 +20,7 @@ public class PlayerStatus : MonoBehaviour {
     [SerializeField]
     private float plastic = 0.0f;
     private const float maxPlastic = 100.0f;
-    private const float passivePlasticIncreaseRate = 0.0f; //隨時間增加的塑料值
+    private const float passivePlasticIncreaseRate = 0.1f; //隨時間增加的塑料值
 
     public bool isRushing = false;
 
@@ -65,10 +65,12 @@ public class PlayerStatus : MonoBehaviour {
     }
 
     void Awake() {
-        Global.player = gameObject;
         staminaBar.maxValue = maxStamina;
         hungerBar.maxValue = maxHunger;
         plasticBar.maxValue = maxPlastic;
+        Global.player = this.gameObject;
+        transform.position = new Vector3(0, -7.5f, 0);
+
     }
     void Update() {
         StatusUpdate(Time.deltaTime);

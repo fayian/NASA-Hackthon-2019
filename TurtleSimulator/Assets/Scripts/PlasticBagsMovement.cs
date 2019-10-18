@@ -10,6 +10,10 @@ public class PlasticBagsMovement : MonoBehaviour
     private float curTime = 0.0f;
     private float speedRange = Global.KmPerHrToUnitPerSec(1.0f);
     private float rotatateSpeedRange = 15.0f;
+    private const float existRadius = 50.0f;
+    private const float eatRadius = 2.0f;
+    private const float eatAngle = 30.0f;
+    private const float plasticIncrease = 1.0f;
     void Start()
     {
         SetVelocity();
@@ -37,6 +41,23 @@ public class PlasticBagsMovement : MonoBehaviour
         }
         transform.position += velocity * Time.fixedDeltaTime;
         transform.eulerAngles += rotation * Time.fixedDeltaTime;
+
+        Vector3 playerPosition = Global.player.transform.position;
+        Vector3 direction = transform.position - playerPosition;
+        float distance = Vector3.Distance(playerPosition, transform.position);
+        Disappear(distance, direction);
     }
-    
+    void Disappear(float distance, Vector3 direction)
+    {
+        if (distance > existRadius)
+        {
+            Destroy(gameObject);
+        }
+
+        if (distance < eatRadius && Vector3.Angle(direction, Global.player.transform.forward) < eatAngle)
+        {
+            Destroy(gameObject);
+            Global.player.GetComponent<PlayerStatus>().EatPlastic(plasticIncrease);
+        }
+    }
 }
