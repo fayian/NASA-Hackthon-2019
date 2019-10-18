@@ -12,9 +12,9 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerStatus player;
 
-    private const float constantSpeed = 4.0f / 60 * 1000 / Global.METER_PER_UNIT;  //4(km/h) in-game scale
-    private const float rushingSpeed = 10.0f / 60 * 1000 / Global.METER_PER_UNIT;  //10(km/h) in-game scale
-    private float speed = constantSpeed;
+    private readonly float constantSpeed = Global.KmPerHrToUnitPerSec(4.0f);  //4(km/h) in-game scale
+    private readonly float rushingSpeed = Global.KmPerHrToUnitPerSec(10.0f);  //10(km/h) in-game scale
+    private float speed;
 
     private float verticalAngle = 0.0f;
     private const float maxVerticalAngle = 20.0f;
@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     
     private void Awake()
     {
+        print(constantSpeed);
+        speed = constantSpeed;
         rb = GetComponent<Rigidbody>();
         player = GetComponent<PlayerStatus>();
     }
