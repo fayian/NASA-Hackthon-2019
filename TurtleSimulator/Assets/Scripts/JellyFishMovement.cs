@@ -11,12 +11,12 @@ public class JellyFishMovement : MonoBehaviour
     private float curTime = 0.0f;
 
     private float speed = 1.0f;
-    private float constantSpeed = 1.5f / 60 * 1000 / Global.METER_PER_UNIT;
-    private float rushingSpeed = 3.0f / 60 * 1000 / Global.METER_PER_UNIT;
+    private float constantSpeed = Global.KmPerHrToUnitPerSec(1.5f);
+    private float rushingSpeed = Global.KmPerHrToUnitPerSec(3.0f);
 
     private float rotatateSpeedRange = 45.0f;
 
-    private const float triggerRadius = 4.0f;
+    private const float triggerRadius = 6.0f;
     private const float existRadius = 50.0f;
     private const float eatRadius = 2.0f;
     private const float eatAngle = 30.0f;

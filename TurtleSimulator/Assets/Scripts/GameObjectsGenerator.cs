@@ -32,7 +32,7 @@ public class GameObjectsGenerator : MonoBehaviour
 
         while(!stop)
         {
-            randGameObject = Random.Range(0, 4);
+            randGameObject = Random.Range(0, 5);
 
             Vector3 generatePosition = new Vector3(Random.Range(-generateArea.x, generateArea.x), Random.Range(-generateArea.y, generateArea.y), Random.Range(-generateArea.z, generateArea.z)) + player.position;
 
