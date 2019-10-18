@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Generator : MonoBehaviour
+public class GameObjectsGenerator : MonoBehaviour
 {
     public GameObject[] gameObjects;
     public Transform player;
