@@ -8,7 +8,7 @@ public class PlasticBagsMovement : MonoBehaviour
     private Vector3 rotation;
     private float switchTime = 2.5f;
     private float curTime = 0.0f;
-    private float speedRange=1.0f;
+    private float speedRange = Global.KmPerHrToUnitPerSec(1.0f);
     private float rotatateSpeedRange = 15.0f;
     void Start()
     {

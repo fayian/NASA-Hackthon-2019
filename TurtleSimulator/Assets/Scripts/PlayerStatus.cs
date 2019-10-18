@@ -6,10 +6,12 @@ public class PlayerStatus : MonoBehaviour {
     public Slider hungerBar;
     public Slider plasticBar;
     //飢餓值
+    [SerializeField]
     private float hunger = 100.0f;
     private const float maxHunger = 100.0f;    
     private const float hungryRate = 0.5f;
     //體力值
+    [SerializeField]
     private float stamina = 100.0f;
     private const float maxStamina = 100.0f;
     private const float staminaRecoverRate = 8.0f;
@@ -31,10 +33,6 @@ public class PlayerStatus : MonoBehaviour {
     public float Plastic { get => plastic; }
     public float MaxPlastic { get => maxPlastic; }
 
-    private void Awake()
-    {
-        Global.player = this.gameObject;
-    }
     //Functions
     public void EatFood(float amount) {
         hunger = Mathf.Min(hunger + amount, maxHunger);
@@ -67,6 +65,7 @@ public class PlayerStatus : MonoBehaviour {
     }
 
     void Awake() {
+        Global.player = gameObject;
         staminaBar.maxValue = maxStamina;
         hungerBar.maxValue = maxHunger;
         plasticBar.maxValue = maxPlastic;

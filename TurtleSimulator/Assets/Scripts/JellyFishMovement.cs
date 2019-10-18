@@ -10,9 +10,9 @@ public class JellyFishMovement : MonoBehaviour
     private float switchTime = 5.0f;
     private float curTime = 0.0f;
 
-    private float speed = 1.0f;
-    private float constantSpeed = 1.0f;
-    private float rushingSpeed = 2.5f;
+    private readonly float constantSpeed = Global.KmPerHrToUnitPerSec(1.0f);
+    private readonly float rushingSpeed = Global.KmPerHrToUnitPerSec(3.0f);
+    private float speed;
 
     private float rotatateSpeedRange = 45.0f;
 
@@ -21,6 +21,7 @@ public class JellyFishMovement : MonoBehaviour
 
     void Start()
     {
+        speed = constantSpeed;
         SetVelocity();
         SetRotation();
         transform.eulerAngles += new Vector3(-90, 0, 0);
