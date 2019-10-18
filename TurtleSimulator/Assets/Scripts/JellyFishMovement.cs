@@ -11,8 +11,8 @@ public class JellyFishMovement : MonoBehaviour
     private float curTime = 0.0f;
 
     private float speed = 1.0f;
-    private float constantSpeed = 1.5f / 60 * 1000 / Global.METER_PER_UNIT;
-    private float rushingSpeed = 3.0f / 60 * 1000 / Global.METER_PER_UNIT;
+    private float constantSpeed = Global.KmPerHrToUnitPerSec(1.5f);
+    private float rushingSpeed = Global.KmPerHrToUnitPerSec(3.0f);
 
     private float rotatateSpeedRange = 45.0f;
 
