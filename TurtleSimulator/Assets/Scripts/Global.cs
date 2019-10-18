@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum GameStatus { RUNNING, PAUSE };
+public enum DeathReason { STARVE, PRESSURE, PLASTIC };
 public static class Global {
     public static readonly float METER_PER_UNIT = 100.0f;
 
@@ -11,8 +12,9 @@ public static class Global {
     }
     public static GameStatus gameStatus = GameStatus.RUNNING;
     public static GameObject player;
-    public static void GameOver() {
+    public static void GameOver(DeathReason deathReason) {
         gameStatus = GameStatus.PAUSE;
         //TODO
+
     }
 }

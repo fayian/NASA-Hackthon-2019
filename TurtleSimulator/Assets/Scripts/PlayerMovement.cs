@@ -111,6 +111,6 @@ public class PlayerMovement : MonoBehaviour
         else 
             depthWarning.texture = depthWarningTextures[0];
 
-        if (transform.position.y < -depth) Global.GameOver();
+        if (transform.position.y < -depth) Global.GameOver(DeathReason.PRESSURE);
     }
 }
