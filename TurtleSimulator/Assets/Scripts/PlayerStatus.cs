@@ -40,7 +40,7 @@ public class PlayerStatus : MonoBehaviour {
     public void EatPlastic(float amount) {
         plastic += amount;
         if (plastic > maxPlastic) {
-            Global.GameOver();
+            Global.GameOver(DeathReason.PLASTIC);
         }
     }
     public void Rush(float deltaTime) {
@@ -52,7 +52,7 @@ public class PlayerStatus : MonoBehaviour {
         if (Global.gameStatus == GameStatus.RUNNING) {
             hunger -= hungryRate * deltaTime;
             if(hunger <= 0) {
-                Global.GameOver();
+                Global.GameOver(DeathReason.STARVE);
             }
 
             EatPlastic(passivePlasticIncreaseRate * deltaTime);
