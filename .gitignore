@@ -4,6 +4,7 @@
 [Ll]ogs/
 [Bb]uild/
 [Bb]uilds/
+[Rr]elease/
 
 # Visual Studio cache directory
 .vs/
