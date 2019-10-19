@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         player = GetComponent<PlayerStatus>();
         SetUpBorder();
-        SetSpawnArea(new Vector3(30000.0f, 3.0f, 10000.0f), new Vector3(50000.0f, 8.0f, 20000.0f));
+        SetSpawnArea(new Vector3(30000.0f, -3.0f, 10000.0f), new Vector3(50000.0f, -8.0f, 20000.0f));
     }
     void FixedUpdate() {
         if(Global.gameStatus == GameStatus.RUNNING) {

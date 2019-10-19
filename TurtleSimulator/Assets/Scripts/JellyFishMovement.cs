@@ -9,10 +9,13 @@ public class JellyFishMovement : MonoBehaviour
 
     private float switchTime = 5.0f;
     private float curTime = 0.0f;
+    private float approachTime=0.0f;
+    private Vector3 rotateDirection;
+    private float fastRotateSpeed = 3.0f;
 
     private float speed = 1.0f;
     private float constantSpeed = Global.KmPerHrToUnitPerSec(1.5f);
-    private float rushingSpeed = Global.KmPerHrToUnitPerSec(3.0f);
+    private float rushingSpeed = Global.KmPerHrToUnitPerSec(5.0f);
 
     private float rotatateSpeedRange = 45.0f;
 
@@ -21,7 +24,6 @@ public class JellyFishMovement : MonoBehaviour
     private const float eatRadius = 2.0f;
     private const float eatAngle = 30.0f;
 
-    private const float hungerRecover = 10.0f;
 
     void Start()
     {
@@ -42,7 +44,9 @@ public class JellyFishMovement : MonoBehaviour
     void FixedUpdate()
     {
         if(Global.gameStatus == GameStatus.RUNNING) {
-            if (curTime < switchTime) { curTime += 1 * Time.fixedDeltaTime; } else {
+            if (curTime < switchTime) { curTime += 1 * Time.fixedDeltaTime; } 
+            else 
+            {
                 curTime = 0.0f;
                 SetRotation();
             }
@@ -68,8 +72,10 @@ public class JellyFishMovement : MonoBehaviour
         if (distance < triggerRadius)
         {
             speed = rushingSpeed;
-            Vector3 rotateDirection = Quaternion.FromToRotation(Vector3.forward, direction).eulerAngles - transform.eulerAngles;
-            transform.eulerAngles += rotateDirection * Time.fixedDeltaTime;
+            float step = fastRotateSpeed * Time.fixedDeltaTime;
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, direction, step, 0.0f);
+            if (Vector3.Angle(transform.forward,direction)>10)
+                transform.rotation = Quaternion.LookRotation(newDir);
         }
         else { speed = constantSpeed; }
 
