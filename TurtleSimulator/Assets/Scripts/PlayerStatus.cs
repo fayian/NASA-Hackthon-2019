@@ -69,8 +69,6 @@ public class PlayerStatus : MonoBehaviour {
         hungerBar.maxValue = maxHunger;
         plasticBar.maxValue = maxPlastic;
         Global.player = this.gameObject;
-        transform.position = new Vector3(0, -7.5f, 0);
-
     }
     void Update() {
         StatusUpdate(Time.deltaTime);
