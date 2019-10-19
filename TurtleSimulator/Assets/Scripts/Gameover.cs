@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Gameover : MonoBehaviour {
     public Image gameoverImage;
@@ -37,5 +38,15 @@ public class Gameover : MonoBehaviour {
     public void EndGame(DeathReason deathReason) {
         this.deathReason = deathReason;
          StartCoroutine(func());
+    }
+
+    public void Retry() {
+        SceneManager.LoadScene("MainGame");
+    }
+    public void MainMenu() {
+        SceneManager.LoadScene("Menu");
+    }
+    public void SeeMore() {
+        //TODO
     }
 }
