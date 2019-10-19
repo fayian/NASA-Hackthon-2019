@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameStatus { RUNNING, PAUSE };
 public enum DeathReason { STARVE, PRESSURE, PLASTIC };
@@ -12,9 +13,10 @@ public static class Global {
     }
     public static GameStatus gameStatus = GameStatus.RUNNING;
     public static GameObject player;
+    public static bool isGameOver = false;
+
     public static void GameOver(DeathReason deathReason) {
         gameStatus = GameStatus.PAUSE;
-        //TODO
-
+        isGameOver = true;
     }
 }
