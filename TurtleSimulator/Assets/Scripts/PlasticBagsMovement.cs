@@ -31,21 +31,20 @@ public class PlasticBagsMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(curTime<switchTime)
-        {curTime += 1 * Time.fixedDeltaTime; }
-        else
-        {
-            curTime = 0.0f;
-            SetVelocity();
-            SetRotation();
-        }
-        transform.position += velocity * Time.fixedDeltaTime;
-        transform.eulerAngles += rotation * Time.fixedDeltaTime;
+        if(Global.gameStatus == GameStatus.RUNNING) {
+            if (curTime < switchTime) { curTime += 1 * Time.fixedDeltaTime; } else {
+                curTime = 0.0f;
+                SetVelocity();
+                SetRotation();
+            }
+            transform.position += velocity * Time.fixedDeltaTime;
+            transform.eulerAngles += rotation * Time.fixedDeltaTime;
 
-        Vector3 playerPosition = Global.player.transform.position;
-        Vector3 direction = transform.position - playerPosition;
-        float distance = Vector3.Distance(playerPosition, transform.position);
-        Disappear(distance, direction);
+            Vector3 playerPosition = Global.player.transform.position;
+            Vector3 direction = transform.position - playerPosition;
+            float distance = Vector3.Distance(playerPosition, transform.position);
+            Disappear(distance, direction);
+        }       
     }
     void Disappear(float distance, Vector3 direction)
     {

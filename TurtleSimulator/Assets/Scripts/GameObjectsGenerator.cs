@@ -23,7 +23,9 @@ public class GameObjectsGenerator : MonoBehaviour
     
     void Update()
     {
-        waitTime = Random.Range(minWaitTime, maxWaitTime);
+        if (Global.gameStatus == GameStatus.RUNNING)
+            waitTime = Random.Range(minWaitTime, maxWaitTime);
+        else stop = true;
     }
 
     IEnumerator GameObjectGenerator()
