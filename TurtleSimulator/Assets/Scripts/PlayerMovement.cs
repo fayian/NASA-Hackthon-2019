@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     public RawImage depthWarning;
     public Texture[] depthWarningTextures = new Texture[4];
 
+    public CoordinateTransformation coords;
+
     private PlayerStatus player;
 
     private readonly float constantSpeed = Global.KmPerHrToUnitPerSec(8.0f);  //8(km/h) in-game scale
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 rightBorder;
     private float topBorder;
     private float bottomBorder;
+    //unit: kilometer
     private readonly Vector2 borderBottomLeft = new Vector2(0.0f, 0.0f);
     private readonly Vector2 borderBottomRight = new Vector2(7636.6f, 0.0f);
     private readonly Vector2 borderTopLeft = new Vector2(833.65f, 3330.0f);
@@ -52,6 +55,13 @@ public class PlayerMovement : MonoBehaviour
             speed = constantSpeed;
             player.isRushing = false;
         }
+
+        float minX, maxX;
+        minX = leftBorder.x * transform.position.z / (borderTopRight.y * 1000 / Global.METER_PER_UNIT);
+        maxX = rightBorder.x * transform.position.z / (borderTopRight.y * 1000 / Global.METER_PER_UNIT) + (borderBottomRight.x * 1000 / Global.METER_PER_UNIT);
+
+        coords.UVMapping((transform.position.x - minX) / (maxX - minX),
+                                            transform.position.z / (borderTopRight.y * 1000 / Global.METER_PER_UNIT));
     }
 
     private void HandleRotation()
@@ -93,9 +103,7 @@ public class PlayerMovement : MonoBehaviour
         else
             transform.eulerAngles = new Vector3(verticalAngle+360, transform.eulerAngles.y, 0);
     }
-
     private void HandleMaxDepth(float depth/*in unity unit*/) {
-
         if (transform.position.y < -depth * 14 / 15) 
             depthWarning.texture = depthWarningTextures[3];
         else if (transform.position.y < -depth * 5 / 6) 
@@ -112,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
         float x = Random.Range(bottomLeft.x, topRight.x);
         float y = Random.Range(bottomLeft.y, topRight.y);
         float z = Random.Range(bottomLeft.z, topRight.z);
-        print(new Vector3(x, y, z));
         transform.position = new Vector3(x, y, z);
     }
     private void SetUpBorder() {
