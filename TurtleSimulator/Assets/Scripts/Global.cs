@@ -17,6 +17,6 @@ public static class Global {
 
     public static void GameOver(DeathReason deathReason) {
         gameStatus = GameStatus.PAUSE;
-        isGameOver = true;
+        GameObject.Find("Gameover").GetComponent<Gameover>().EndGame(deathReason);
     }
 }
