@@ -21,24 +21,22 @@ public class NemoMovement : MonoBehaviour
     
     void Update()
     {
-        if(curTime < switchTime)
-        { curTime += 1 * Time.fixedDeltaTime; }
-        else
-        {
-            curTime = 0.0f;
-            SetRotation();
-        }
+        if(Global.gameStatus == GameStatus.RUNNING) {
+            if (curTime < switchTime) { curTime += 1 * Time.fixedDeltaTime; } else {
+                curTime = 0.0f;
+                SetRotation();
+            }
 
-        if (curTime < 1)
-        { transform.eulerAngles += rotation * Time.fixedDeltaTime; }
+            if (curTime < 1) { transform.eulerAngles += rotation * Time.fixedDeltaTime; }
 
-        SetVelocity();
-        transform.position += velocity * Time.fixedDeltaTime;
+            SetVelocity();
+            transform.position += velocity * Time.fixedDeltaTime;
 
-        Vector3 playerPosition = Global.player.transform.position;
-        float distance = Vector3.Distance(playerPosition, transform.position);
-        if (distance > existRadius)
-            Destroy(gameObject);
+            Vector3 playerPosition = Global.player.transform.position;
+            float distance = Vector3.Distance(playerPosition, transform.position);
+            if (distance > existRadius)
+                Destroy(gameObject);
+        }       
     }
 
     void SetVelocity()

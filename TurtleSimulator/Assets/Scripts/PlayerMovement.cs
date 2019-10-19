@@ -146,13 +146,15 @@ public class PlayerMovement : MonoBehaviour
         SetSpawnArea(new Vector3(30000.0f, 3.0f, 10000.0f), new Vector3(50000.0f, 8.0f, 20000.0f));
     }
     void FixedUpdate() {
-        HandleUpAndDown();
-        HandleRotation();
-        HandleMovement();
-        HandleMaxDepth(15.0f);
-        CheckBorder();
-        Debug.DrawLine(new Vector3(0.0f, 0.0f, 0.0f), new Vector3(8336.5f, 0.0f, 33300f), new Color(255, 0, 0));
-        Debug.DrawLine(new Vector3(76366f, 0.0f, 0.0f), new Vector3(68029.5f, 0.0f, 33300f), new Color(255, 0, 0));
+        if(Global.gameStatus == GameStatus.RUNNING) {
+            HandleUpAndDown();
+            HandleRotation();
+            HandleMovement();
+            HandleMaxDepth(15.0f);
+            CheckBorder();
+            //Debug.DrawLine(new Vector3(0.0f, 0.0f, 0.0f), new Vector3(8336.5f, 0.0f, 33300f), new Color(255, 0, 0));
+            //Debug.DrawLine(new Vector3(76366f, 0.0f, 0.0f), new Vector3(68029.5f, 0.0f, 33300f), new Color(255, 0, 0));
+        }        
     }
 
     void OnTriggerEnter(Collider other) {
