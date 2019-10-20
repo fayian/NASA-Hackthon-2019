@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class CoordinateTransformation : MonoBehaviour
 {
+    public GameObject directionIndicator;
+    private readonly Vector3 northPole = new Vector3(Global.KmToUnit(3816.3f), 0.0f, Global.KmToUnit(8880.0f));
+
     private Text coordText;
 
     private const float MIN_LATITIUDE = 10; //N
@@ -20,12 +23,19 @@ public class CoordinateTransformation : MonoBehaviour
         latitude = (MAX_LATITIUDE - MIN_LATITIUDE) * v + MIN_LATITIUDE;
     }
 
+    private void IndicatorRotation() {
+        float deltaCita = Global.player.transform.eulerAngles.y - Quaternion.LookRotation(northPole - Global.player.transform.position).eulerAngles.y;
+        directionIndicator.transform.eulerAngles = new Vector3(0.0f, 0.0f, deltaCita);
+    }
+
     void Awake() {
         Global.player.GetComponent<PlayerMovement>().coords = this;
         coordText = GetComponent<Text>();
     }
     void Update()
     {
+        IndicatorRotation();
+        Debug.DrawLine(Global.player.transform.position, northPole, new Color(255, 0, 0));
         depth = -Global.player.transform.position.y * Global.METER_PER_UNIT;
 
         if (longtitude < 180)
