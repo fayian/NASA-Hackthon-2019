@@ -14,12 +14,15 @@ public class Gameover : MonoBehaviour {
     private Dictionary<DeathReason, string> deathReasonContent = new Dictionary<DeathReason, string>();
 
     void Awake() {
-        deathReasonContent.Add(DeathReason.PLASTIC, 
-            "Plastic is a serious problem, especially when it comes to the jellyfish eater.");
+        deathReasonContent.Add(DeathReason.PLASTIC,
+            "You ate too much plastic bags! Sea turtles have a 14% death rate when eating a plastic piece.\n\n" +
+            "If you are wondering when did you eat any, so do sea turtles are.  Sea turtles can confuse plastic bags with jellyfish easily.\n\n" +
+            "With the passage of time, plastic piles up in the body of sea turtles due to plastic they ate and also microplastics all around the ocean, threatening their lives.");
+
         deathReasonContent.Add(DeathReason.STARVE,
-            "You starved to death");
+            "You starved to death. I have nothing to say.");
         deathReasonContent.Add(DeathReason.PRESSURE,
-            "Although leatherbacks are great divers, individual have been recorded diving to depths as great as 1,280 m, it doesn't mean that they can dive to the bottom of ocean.");
+            "Although leatherbacks are great divers, individual have been recorded diving to depths as great as 1,280 m, it doesn't mean that they can dive to the bottom of the ocean.");
     }
 
     private IEnumerator func() {
@@ -47,6 +50,6 @@ public class Gameover : MonoBehaviour {
         SceneManager.LoadScene("Menu");
     }
     public void SeeMore() {
-        //TODO
+        Application.OpenURL("https://htk7fq0q9o.mobirisesite.com/");
     }
 }
