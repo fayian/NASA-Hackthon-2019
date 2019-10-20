@@ -15,7 +15,7 @@ public class Gameover : MonoBehaviour {
 
     void Awake() {
         deathReasonContent.Add(DeathReason.PLASTIC,
-            "You ate too much plastic bags! Sea turtles have a 14% death rate when eating a plastic piece.\n\n" +
+            "You ate too much plastic bags! Sea turtles have 22% death rate when eating the first plastic piece. The death rate will rise to 50% after eating 14 pieces\n\n" +
             "If you are wondering when did you eat any, so do sea turtles are.  Sea turtles can confuse plastic bags with jellyfish easily.\n\n" +
             "With the passage of time, plastic piles up in the body of sea turtles due to plastic they ate and also microplastics all around the ocean, threatening their lives.");
 
