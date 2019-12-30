@@ -18,6 +18,6 @@ public static class Global {
 
     public static void GameOver(DeathReason deathReason) {
         gameStatus = GameStatus.PAUSE;
-        GameObject.Find("Gameover").GetComponent<Gameover>().EndGame(deathReason);
+        GameObject.Find("ScriptHandler").GetComponent<Gameover>().EndGame(deathReason);
     }
 }

@@ -19,13 +19,15 @@ public class CameraController : MonoBehaviour {
     }
 
     void Update() {
-        mousePos = Input.mousePosition;
-        if (mousePos.x < 0) mousePos.x = 0; if (mousePos.x > Screen.width) mousePos.x = Screen.width;
-        if (mousePos.y < 0) mousePos.y = 0; if (mousePos.y > Screen.height) mousePos.y = Screen.height;
+        if(Global.gameStatus == GameStatus.RUNNING) {
+            mousePos = Input.mousePosition;
+            if (mousePos.x < 0) mousePos.x = 0; if (mousePos.x > Screen.width) mousePos.x = Screen.width;
+            if (mousePos.y < 0) mousePos.y = 0; if (mousePos.y > Screen.height) mousePos.y = Screen.height;
 
-        rotation.x = -(mousePos.y - Screen.height / 2) * (sightHeight / Screen.height);
-        rotation.y = (mousePos.x - Screen.width / 2) * (sightWidth / Screen.width);
-        transform.eulerAngles = Quaternion.LookRotation(transform.position - transform.parent.position).eulerAngles + rotation;
+            rotation.x = -(mousePos.y - Screen.height / 2) * (sightHeight / Screen.height);
+            rotation.y = (mousePos.x - Screen.width / 2) * (sightWidth / Screen.width);
+            transform.eulerAngles = Quaternion.LookRotation(transform.position - transform.parent.position).eulerAngles + rotation;
+        }
     }
 }
     

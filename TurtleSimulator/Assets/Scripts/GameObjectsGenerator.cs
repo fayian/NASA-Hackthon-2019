@@ -11,7 +11,6 @@ public class GameObjectsGenerator : MonoBehaviour
     private float maxWaitTime = 0.5f;
     private float minWaitTime = 1.5f;
     private float startWaitTime = 0.5f;
-    private bool stop=false;
 
     private int randGameObject;
     void Start()
@@ -21,24 +20,25 @@ public class GameObjectsGenerator : MonoBehaviour
     }
 
     
-    void Update()
-    {
+    void Update() {
         if (Global.gameStatus == GameStatus.RUNNING)
             waitTime = Random.Range(minWaitTime, maxWaitTime);
-        else stop = true;
     }
 
     IEnumerator GameObjectGenerator()
     {
         yield return new WaitForSeconds(startWaitTime);
 
-        while(!stop)
+        while(true)
         {
-            randGameObject = Random.Range(0, 5);
+            if(Global.gameStatus == GameStatus.RUNNING)
+            {
+                randGameObject = Random.Range(0, 5);
 
-            Vector3 generatePosition = new Vector3(Random.Range(-generateArea.x, generateArea.x), Random.Range(-generateArea.y, generateArea.y), Random.Range(-generateArea.z, generateArea.z)) + player.position;
+                Vector3 generatePosition = new Vector3(Random.Range(-generateArea.x, generateArea.x), Random.Range(-generateArea.y, generateArea.y), Random.Range(-generateArea.z, generateArea.z)) + player.position;
 
-            Instantiate(gameObjects[randGameObject], generatePosition + transform.TransformPoint(0, 0, 0), gameObject.transform.rotation);
+                Instantiate(gameObjects[randGameObject], generatePosition + transform.TransformPoint(0, 0, 0), gameObject.transform.rotation);
+            }
 
             yield return new WaitForSeconds(waitTime);
         }
